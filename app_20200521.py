@@ -30,8 +30,6 @@ def playGame():
     rockLogic()
 
 
-
-
 ### get user input ###
 
 def userRock():
@@ -40,13 +38,11 @@ def userRock():
 
     playGame()
 
-
 def userPaper():
     global usersChoice
     usersChoice = 'paper'
 
     playGame()
-
 
 def userScissors():
     global usersChoice
@@ -57,51 +53,41 @@ def userScissors():
 
 
 
-
-
 def computerTurn():
     global computerChoice
     computerChoice = random.choice(choices)
 
-    computerChoice = 'rock'
+    
 
-
-    # test
-    computerLabel = Label(master=topContainer, text= 'comp: ' + computerChoice, font=('Times New Roman', 24))
-    computerLabel.pack()
 
 
 def rockLogic():
-
+    global resultLabel
     # tie
     if computerChoice == usersChoice:
-        resultLabel = Label(master=topContainer, text= 'Tie', font=('Times New Roman', 24))
-        resultLabel.pack()
+        resultLabel.config(text='tie')
+
 
     elif computerChoice in ['rock', 'paper'] and usersChoice in ['rock', 'paper']:
-        if computerChoice == 'paper':
-            resultLabel = Label(master=topContainer, text= 'Bot wins', font=('Times New Roman', 24))
-            resultLabel.pack()
+        if computerChoice == 'paper':            
+            resultLabel.config(text='Bot wins')
         else:
-            resultLabel = Label(master=topContainer, text= 'You wins', font=('Times New Roman', 24))
-            resultLabel.pack()
+            resultLabel.config(text='You win')
 
     elif computerChoice in ['rock', 'scissors'] and usersChoice in ['rock', 'scissors']:
         if computerChoice == 'rock':
-            resultLabel = Label(master=topContainer, text= 'Bot wins', font=('Times New Roman', 24))
-            resultLabel.pack()
+            resultLabel.config(text='Bot wins')
         else:
-            resultLabel = Label(master=topContainer, text= 'You wins', font=('Times New Roman', 24))
-            resultLabel.pack()
+            resultLabel.config(text='You win')
         
     elif computerChoice in ['paper', 'scissors'] and usersChoice in ['paper', 'scissors']:
         if computerChoice == 'scissors':
-            resultLabel = Label(master=topContainer, text= 'Bot wins', font=('Times New Roman', 24))
-            resultLabel.pack()
+            resultLabel.config(text='Bot wins')
         else:
-            resultLabel = Label(master=topContainer, text= 'You wins', font=('Times New Roman', 24))
-            resultLabel.pack()
-
+            resultLabel.config(text='You win')
+    
+    
+    choicesLabel.config(text = 'Bot: ' + computerChoice + ' VS. You: ' + usersChoice)
 
 
 
@@ -118,21 +104,29 @@ def rockLogic():
 root = Tk()
 root.title('Rock Paper Scissors')
 # set width x height
-root.geometry('1000x700')
-
-
-bottomContainer = Frame(root)
-bottomContainer.pack()
+root.geometry('800x600')
 
 
 topContainer = Frame(root)
-topContainer.pack(side=BOTTOM)
+topContainer.pack()
+
+
+bottomContainer = Frame(root)
+bottomContainer.pack(side=BOTTOM)
 
 
 ######################## Label ########################
 
-titleLabel = Label(master=topContainer, text='Rock Paper Scissors', font=('Times New Roman', 24))
+titleLabel = Label(master=topContainer, text='Rock Paper Scissors', font=('Times New Roman', 32))
 titleLabel.pack()
+
+
+resultLabel = Label(master=topContainer, text='', font=('Times New Roman', 28))
+resultLabel.pack(pady=40)
+
+choicesLabel = Label(topContainer, text = '', font=('Times New Roman', 18))
+choicesLabel.pack(pady=10)
+
 
 promptLabel = Label(master=topContainer, text='What is your choice?', font=('Times New Roman', 18))
 promptLabel.pack()
